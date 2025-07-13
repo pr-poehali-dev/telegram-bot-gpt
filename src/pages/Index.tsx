@@ -14,8 +14,24 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Icon from "@/components/ui/icon";
+import { useState } from "react";
 
 const Index = () => {
+  const [showChatDemo, setShowChatDemo] = useState(false);
+  const [showImageDemo, setShowImageDemo] = useState(false);
+
+  const startTelegramBot = () => {
+    // Открываем ссылку на бота в новой вкладке
+    window.open("https://t.me/your_bot_username", "_blank");
+  };
+
+  const startChat = () => {
+    setShowChatDemo(true);
+  };
+
+  const generateImage = () => {
+    setShowImageDemo(true);
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50">
       {/* Header */}
@@ -29,7 +45,11 @@ const Index = () => {
               AI Assistant Bot
             </span>
           </div>
-          <Button variant="outline" className="hover-scale">
+          <Button
+            variant="outline"
+            className="hover-scale"
+            onClick={startTelegramBot}
+          >
             <Icon name="Send" size={16} className="mr-2" />
             Запустить в Telegram
           </Button>
@@ -57,11 +77,17 @@ const Index = () => {
             <Button
               size="lg"
               className="bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 text-white hover-scale"
+              onClick={startChat}
             >
               <Icon name="MessageCircle" size={20} className="mr-2" />
               Начать чат
             </Button>
-            <Button size="lg" variant="outline" className="hover-scale">
+            <Button
+              size="lg"
+              variant="outline"
+              className="hover-scale"
+              onClick={generateImage}
+            >
               <Icon name="Image" size={20} className="mr-2" />
               Генерировать изображение
             </Button>
@@ -76,6 +102,91 @@ const Index = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-blue-500/20 to-transparent rounded-2xl"></div>
           </div>
+
+          {/* Chat Demo Modal */}
+          {showChatDemo && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-fade-in">
+              <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4 animate-scale-in">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-bold">Демо чата с ИИ</h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowChatDemo(false)}
+                  >
+                    <Icon name="X" size={20} />
+                  </Button>
+                </div>
+                <div className="space-y-4 mb-4">
+                  <div className="bg-gray-100 rounded-lg p-3">
+                    <p className="text-sm">
+                      👤 Привет! Расскажи про искусственный интеллект
+                    </p>
+                  </div>
+                  <div className="bg-blue-500 text-white rounded-lg p-3">
+                    <p className="text-sm">
+                      🤖 Привет! Искусственный интеллект (ИИ) — это технология,
+                      которая позволяет машинам выполнять задачи, требующие
+                      человеческого интеллекта: распознавание речи, принятие
+                      решений, решение проблем...
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  className="w-full bg-gradient-to-r from-blue-500 to-emerald-500 text-white"
+                  onClick={startTelegramBot}
+                >
+                  Попробовать в Telegram
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {/* Image Demo Modal */}
+          {showImageDemo && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-fade-in">
+              <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4 animate-scale-in">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-bold">
+                    Демо генерации изображений
+                  </h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowImageDemo(false)}
+                  >
+                    <Icon name="X" size={20} />
+                  </Button>
+                </div>
+                <div className="space-y-4 mb-4">
+                  <div className="bg-gray-100 rounded-lg p-3">
+                    <p className="text-sm">
+                      👤 Создай картинку: космический корабль в стиле киберпанк
+                    </p>
+                  </div>
+                  <div className="bg-emerald-500 text-white rounded-lg p-3">
+                    <p className="text-sm">🎨 Генерирую изображение... ⏳</p>
+                  </div>
+                  <div className="bg-white border-2 border-emerald-200 rounded-lg p-3">
+                    <div className="w-full h-32 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg flex items-center justify-center">
+                      <span className="text-white font-bold">
+                        🚀 Космический корабль
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">
+                      Изображение сгенерировано ИИ
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  className="w-full bg-gradient-to-r from-blue-500 to-emerald-500 text-white"
+                  onClick={startTelegramBot}
+                >
+                  Попробовать в Telegram
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -227,9 +338,9 @@ const Index = () => {
                 Как начать пользоваться ботом?
               </AccordionTrigger>
               <AccordionContent className="text-gray-600">
-                Просто нажмите кнопку "Запустить в Telegram" и следуйте
+                Просто нажмите кнопку "Запустить в Telegram" выше и следуйте
                 инструкциям. Бот сразу готов к работе — никаких сложных
-                настроек!
+                настроек! Или попробуйте демо прямо здесь.
               </AccordionContent>
             </AccordionItem>
 
@@ -278,6 +389,7 @@ const Index = () => {
           <Button
             size="lg"
             className="bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 text-white hover-scale text-lg px-8 py-4"
+            onClick={startTelegramBot}
           >
             <Icon name="Rocket" size={24} className="mr-2" />
             Запустить бота
