@@ -22,7 +22,7 @@ const Index = () => {
 
   const startTelegramBot = () => {
     // Открываем ссылку на бота в новой вкладке
-    window.open("https://t.me/AIPersonalAssistant547Bot", "_blank");
+    window.open("https://t.me/zommzommbot", "_blank");
   };
 
   const startChat = () => {
